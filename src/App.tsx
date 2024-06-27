@@ -36,7 +36,7 @@ function App() {
     <>
       <main>
         <Header></Header>
-        <FormControlLabel
+        {!loading && <FormControlLabel
           control={
             <Switch
               checked={onlyJson}
@@ -46,7 +46,7 @@ function App() {
             />
           }
           label="Only JSON"
-        />
+        />}
         {!loading && !finished && <PDFDropzone onDrop={onDrop}></PDFDropzone>}
         {loading && !finished && <LoaderSpinner></LoaderSpinner>}
         {!onlyJson && finished && <FinishMessage></FinishMessage>}
