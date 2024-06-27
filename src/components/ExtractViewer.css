@@ -1,0 +1,42 @@
+/* ExtractViewer.css */
+
+.card-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.invoice-card {
+    margin-bottom: 10px;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(167, 167, 167, 0.212);
+}
+
+.invoice-card-content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.modal-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background-color: #fff;
+    box-shadow: 24px;
+    padding: 16px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.accordion-item {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}

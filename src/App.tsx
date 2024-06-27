@@ -6,14 +6,16 @@ import Header from "./components/Header";
 import PDFFiles from "./components/PDFFiles";
 import axios from "axios";
 import useFiles from "./useFiles";
-import Loader from "./components/Loader";
 import LoaderSpinner from "./components/Loader";
 import FinishMessage from "./components/FinishMessage";
+import ExtractViewer from "./components/ExtractViewer";
+import { FormControlLabel, Switch } from "@mui/material";
 
 function App() {
 
-  const { error, files, finished, loading, onDrop} = useFiles();
+  const { error, files, finished, loading, onDrop, invoices, onlyJson, handleJsonOption } = useFiles();
 
+  /*
   useEffect(() => {
     if (finished) {
       //Reload the page after 5 seconds
@@ -24,14 +26,35 @@ function App() {
 
   }, [loading, finished, files, error]);
 
+  */
+  const handleSwitchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    handleJsonOption(event.target.checked);
+  };
+
+
   return (
     <>
       <main>
         <Header></Header>
-
+        <FormControlLabel
+          control={
+            <Switch
+              checked={onlyJson}
+              onChange={handleSwitchChange}
+              name="onlyJsonSwitch"
+              color="primary"
+            />
+          }
+          label="Only JSON"
+        />
         {!loading && !finished && <PDFDropzone onDrop={onDrop}></PDFDropzone>}
         {loading && !finished && <LoaderSpinner></LoaderSpinner>}
-        {finished && <FinishMessage></FinishMessage>}
+        {!onlyJson && finished && <FinishMessage></FinishMessage>}
+        {onlyJson && finished && <ExtractViewer invoices={invoices}></ExtractViewer>}
+        {error && <p>{error}</p>}
+
+
+
       </main>
     </>
   );
